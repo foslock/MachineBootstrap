@@ -1,0 +1,44 @@
+[user]
+    name = J. Foster Lockwood
+    email = foslock@gmail.com
+[pager]
+    status = true
+    show-branch = true
+[format]
+    numbered = auto
+[merge]
+    tool = opendiff
+[log]
+    decorate = short
+[color]
+    ui = auto
+    interactive = auto
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+[alias]
+    c = commit
+    cm = commit -m
+    co = checkout
+    cp = cherry-pick
+    diff = diff --word-diff
+    df = !git ls-files -m | xargs echo
+    f = fetch
+    # find-base-branch: naive search for shared integration branches in this order: dev, master
+    find-base-branch = !((git branch | grep dev) || (git branch | grep master)) | sed \"s/ //g\"
+    frost = !git ls-files -m | grep .py | xargs frosted
+    flake = !git ls-files -m | grep .py | xargs flake8
+    nb = checkout -B
+    s = status
+    last = log -1 HEAD
+    make-pr = !open $(git url-pr)
+    remote-delete = push origin --delete
+    this-branch = !git branch 2>/dev/null | grep \"^\\*\" | sed \"s/^\\* //\"
+    url = !git remote -v | head -1 | awk \"{print \\$2}\" | sed \"s|git@|https://|\" | sed \"s|.com:|.com/|\" | sed \"s|\\.git||\"
+    url-pr = !echo $(git url)/compare/$(git find-base-branch)...$(git this-branch)
+    v = rev-parse --short HEAD
+[credential]
+    helper = osxkeychain
+[push]
+    default = simple
