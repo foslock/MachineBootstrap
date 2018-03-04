@@ -1,4 +1,4 @@
-echo Hello, `whoami`
+# echo Hello, `whoami`
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
